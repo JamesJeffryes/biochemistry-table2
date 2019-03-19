@@ -1,3 +1,6 @@
+# Biochemistry Tables
+This is a react app to display Biochemistry Data for the US Department of Energy [Biological Knowledge Base](https://kbase.us)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
