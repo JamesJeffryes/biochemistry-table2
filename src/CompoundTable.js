@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
+import filterFactory, { textFilter, numberFilter } from 'react-bootstrap-table2-filter';
 import axios from 'axios';
 
 function imgFormater(cell, row) {
@@ -13,9 +14,15 @@ function imgFormater(cell, row) {
 
 function aliasFormater(cell, row) {
     return (
-        <span>{cell.replace(/\|/g, ', ').replace(/;/g, '\n')}</span>
+        <span>{String(cell).replace(/\|/g, ', ').replace(/;/g, '\n')}</span>
     );
   }
+
+const NoDataIndication = () => (
+    <div className="text-center">
+        <h1>Loading...</h1>
+    </div>
+);
 
 const expandRow = {
   renderer: row => {
@@ -52,7 +59,8 @@ class CompoundTable extends Component {
     columns: [{
       dataField: 'id',
       text: 'ID',
-      sort: true
+      sort: true,
+      filter: textFilter()
     }, {
       dataField: 'id',
       text: 'Image',
@@ -60,23 +68,28 @@ class CompoundTable extends Component {
     }, {
       dataField: 'name',
       text: 'Name',
-      sort: true
+      sort: true,
+      filter: textFilter()
     }, {
       dataField: 'formula',
       text: 'Formula',
-      sort: true
+      sort: true,
+      filter: textFilter()
     }, {
       dataField: 'mass',
       text: 'Mass',
-      sort: true
+      sort: true,
+      filter: numberFilter()
     }, {
       dataField: 'charge',
       text: 'Charge',
-      sort: true
+      sort: true,
+      filter: numberFilter()
     }, {
       dataField: 'aliases',
       text: 'Aliases',
-      formatter: aliasFormater
+      formatter: aliasFormater,
+      filter: textFilter()
     }]
   };
 
@@ -91,14 +104,16 @@ class CompoundTable extends Component {
 
   render() {
     return (
-      <div className="container" style={{ marginTop: 50 }}>
         <BootstrapTable
         keyField='id'
+        headerClasses='table-header'
         data={ this.state.table_items }
         columns={ this.state.columns }
         pagination={ paginationFactory() }
-        expandRow={ expandRow } />
-      </div>
+        expandRow={ expandRow }
+        filter={ filterFactory() }
+        noDataIndication={ () => <NoDataIndication/> }
+        />
     );
   }
 }

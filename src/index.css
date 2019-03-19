@@ -20,13 +20,19 @@ code {
 
 .tab-list-item {
   display: inline-block;
-  list-style: none;
-  margin-bottom: -1px;
-  padding: 0.5rem 0.75rem;
+  padding: 4px 8px;
+  margin: 0 8px 0 8px;
+  cursor: pointer;
+  vertical-align: center;
+  border: 1px solid rgba(200, 200, 200, 0.5);
+  border-bottom: none;
+  background-color: #ddd;
+  opacity: 0.8;
 }
 
 .tab-list-active {
-  background-color: white;
-  border: solid #ccc;
-  border-width: 1px 1px 0 1px;
+  border: 1px solid rgba(200, 200, 200, 1);
+  margin-bottom: -1px;
+  border-bottom: 1px solid #fff;
+  background-color: transparent;
 }
