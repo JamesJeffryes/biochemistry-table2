@@ -4,8 +4,8 @@ import BiochemistryTable from "./BiochemistryTable";
 class CompoundTable extends Component {
     imgFormater = (cell, row) => {
         return (
-            <object data={`http://minedatabase.mcs.anl.gov/compound_images/ModelSEED/${cell}.png`}
-                type="image/png" aria-label={`Image for ${cell}`} style={{height: '100px'}}/>
+            <img src={`http://minedatabase.mcs.anl.gov/compound_images/ModelSEED/${cell}.png`}
+                alt="" style={{height: '100px'}} onError={i => i.target.src=''}/>
         );
     };
 
@@ -20,8 +20,8 @@ class CompoundTable extends Component {
             return (
                 <div className="row">
                     <div className="col-sm-4">
-                        <object data={`http://minedatabase.mcs.anl.gov/compound_images/ModelSEED/${row.id}.png`}
-                                type="image/png" aria-label={`Image for ${row.id}`} className='compound-detail-image'/>
+                        <img src={`http://minedatabase.mcs.anl.gov/compound_images/ModelSEED/${row.id}.png`}
+                             alt="" onError={i => i.target.src=''} className='compound-detail-image'/>
                     </div>
                     <div className="col-sm-8">
                         <ul style={{'list-style-type': 'none'}}>
