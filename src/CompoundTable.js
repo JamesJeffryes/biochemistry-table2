@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import BiochemistryTable from "./BiochemistryTable";
 
 class CompoundTable extends Component {
-    imgFormater = (cell, row) => {
+    imgFormatter = (cell, row) => {
         return (
             <img src={`http://minedatabase.mcs.anl.gov/compound_images/ModelSEED/${cell}.png`}
                 alt="" style={{height: '100px'}} onError={i => i.target.src=''}/>
         );
     };
 
-    aliasFormater = (cell, row) => {
+    aliasFormatter = (cell, row) => {
         return (
             <span>{String(cell).replace(/\|/g, ', ').replace(/;/g, '\n')}</span>
         );
@@ -55,7 +55,7 @@ class CompoundTable extends Component {
         }, {
             dataField: 'id',
             text: 'Image',
-            formatter: this.imgFormater
+            formatter: this.imgFormatter
         }, {
             dataField: 'name',
             text: 'Name',
@@ -75,7 +75,7 @@ class CompoundTable extends Component {
         }, {
             dataField: 'aliases',
             text: 'Aliases',
-            formatter: this.aliasFormater,
+            formatter: this.aliasFormatter,
         }]
     };
 

@@ -3,10 +3,51 @@ import BiochemistryTable from "./BiochemistryTable";
 
 
 class ReactionTable extends Component {
-    aliasFormater = (cell, row) => {
+    aliasFormatter = (cell, row) => {
+        return <span>{String(cell).replace(/\|/g, ', ').replace(/;/g, '\n')}</span>
+    };
+
+    renderCompound = (comp_txt) => {
+        const [_, stoic, cid] = /(\([0-9.]+\)) (\w+)/.exec(comp_txt);
         return (
-            <span>{String(cell).replace(/\|/g, ', ').replace(/;/g, '\n')}</span>
-        );
+            <React.Fragment>
+                <div className={'col-md-auto p-0'}>
+                    {stoic}
+                </div>
+                <div className={'col-md-auto'}>
+                    <img src={`http://minedatabase.mcs.anl.gov/compound_images/ModelSEED/${cid}.png`}
+                         alt="" style={{height: '110px'}} onError={i => i.target.src=''}/>
+                </div>
+            </React.Fragment>
+        )
+
+    };
+
+    renderHalfRxn(compounds){
+        return compounds.split("+")
+            .map(i => {return this.renderCompound(i)})
+            .reduce((prev, curr) => [prev, <h4 className='col-md-auto'> + </h4>, curr])
+    };
+
+    reactionImage = (row) => {
+        const [reactants, products] = row.code.split(" <=> ");
+        let sign = '↔';
+        if (row.direction === ">") {
+            sign = '→';
+        } else if (row.direction === "<") {
+            sign = '←';
+        }
+        return (
+            <div className="container">
+                <div className="row align-items-center">
+                    {this.renderHalfRxn(reactants)}
+                    <h4 className='col-md-auto'>{sign}</h4>
+                </div>
+                <div className="row align-items-center">
+                    {this.renderHalfRxn(products)}
+                </div>
+            </div>
+        )
     };
 
     expandRow = {
@@ -14,6 +55,7 @@ class ReactionTable extends Component {
             return (
                 <div className="row">
                     <div className="col-sm">
+                        {this.reactionImage(row)}
                     </div>
                     <div className="col-sm">
                         <ul style={{'list-style-type': 'none'}}>
@@ -59,7 +101,7 @@ class ReactionTable extends Component {
         }, {
             dataField: 'aliases',
             text: 'Aliases',
-            formatter: this.aliasFormater,
+            formatter: this.aliasFormatter,
         }]
     };
 
