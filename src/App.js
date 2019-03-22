@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import '../node_modules/@fortawesome/fontawesome-free/css/all.min.css';
 import Tabs from './Tabs';
-import CompoundTable from './CompoundTable.js';
+import CompoundTable from './CompoundTable';
+import ReactionTable from './ReactionTable';
 
 class App extends Component {
   render() {
@@ -11,7 +14,7 @@ class App extends Component {
             <CompoundTable/>
           </div>
           <div label="Reactions">
-            <h2>Reaction table will go here</h2>
+            <ReactionTable/>
           </div>
         </Tabs>
       </div>

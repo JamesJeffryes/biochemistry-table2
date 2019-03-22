@@ -36,3 +36,38 @@ code {
   border-bottom: 1px solid #fff;
   background-color: transparent;
 }
+
+.compound-detail-image{
+    height: 300px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+
+  .caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    vertical-align: middle;
+    border-top: 4px dashed;
+    border-top: 4px solid \9;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+    color: #cccccc;
+  }
+
+  .dropup .caret, .navbar-fixed-bottom .dropdown .caret {
+    border-top: 0;
+    border-bottom: 4px dashed;
+    border-bottom: 4px solid \9;
+    content: "";
+  }
+
+  .react-bootstrap-table-sort-order .caret{
+    color: #000000;
+  }
+
+  .sortable {
+    white-space: nowrap;
+  }
